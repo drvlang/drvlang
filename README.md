@@ -2,7 +2,7 @@
 
 <img align="right" width="112" alt="A snowball rolling down a blue slope" src="assets/drvlang-avatar.png">
 
-drvlang builds native lockfile projects with Nix. Each language has a CLI for working in a checkout and a flake interface for sharing its builds and tests.
+drvlang builds native lockfile projects with Nix. Each language has a CLI for working in a checkout and a flake interface for sharing its builds and tests. Read the [project overview](https://drvlang.org/) for a worked monorepo and CI example.
 
 | Language | Builder | Dependency input |
 | --- | --- | --- |
