@@ -17,3 +17,5 @@ drvlang builds native lockfile projects with Nix. Each language has a CLI for wo
 | C and C++ | [drvcpp](https://github.com/drvlang/drvcpp) | Meson wrap files |
 
 Each builder's README describes its supported projects and platforms. The [shared contributor instructions](AGENTS.md) define the cross-language contract. [drvkit](https://github.com/drvlang/drvkit) contains shared implementations.
+
+Builder-generated packages and checks use floating content addresses by default. Nix computes the address from the installed output and its references. When a changed recipe produces the same output, downstream targets with otherwise identical inputs can reuse their previous builds. Dependency downloads still use the ecosystem's locked integrity data.
