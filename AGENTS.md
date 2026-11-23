@@ -1,0 +1,23 @@
+# Working on drvlang
+
+These instructions apply to every drvlang language builder and to their shared tooling. Each repository links here from its root AGENTS.md. Update this file when changing the shared contract, and exercise the change in the affected repositories.
+
+## Build from the native lockfile
+
+- Use dynamic Nix derivations on the public build and test paths. A planner running during the build must produce a derivation from the project's dependency or compilation graph. Consume its output through `builtins.outputOf`. The consumer must be able to evaluate and build with `allow-import-from-derivation = false`. Document the Nix features needed by both client and builder.
+- Treat the native lockfile and checked-in manifests as the source of dependency versions and integrity data. After a native lockfile update, the same Nix expression and CLI invocation must work without replacing a Nix hash, running a pin generator, or committing a second dependency manifest. Verify downloaded dependencies against the native checksums or immutable source identities. Keep the compiler, package manager, and builder inputs pinned.
+- Use the ecosystem's current, fast, reproducible workflow. Choose uv for Python and pnpm for JavaScript. Document the supported native lockfile formats. Prefer Rust for new planners, CLIs, and benchmark harnesses. Go is suitable for tooling that benefits from its native Go APIs.
+- Keep source inputs as narrow as correctness allows. Preserve shared workspace packages, lockfiles, and generated inputs needed by the selected target. Avoid making VCS metadata, local caches, installation directories, result links, or unrelated build products inputs to a build.
+
+## Give each language the same entry points
+
+- Provide `drv<language> build`, `test`, and `run`. Accept `-C PROJECT` and an optional positional target. Support output-link selection on builds and pass arguments after `--` to the test runner or built program. Preserve exit status from builds, tests, and programs.
+- Make a single-project flake usable with `lib.mkFlake { src = ./.; }` and expose the build primitive through `lib.mkPackage`. Support a monorepo with `lib.mkMonorepoFlake`, one named target per program, and shared packages. Accept an explicit `commands` name-to-relative-path map or the same map under `commands` in a root `drvlang.json`. A target selected through the CLI and its named flake output must select the same project. Language-native conventions can provide additional discovery.
+- Provide `packages`, `checks`, and `apps` for supported systems. Build outputs contain the selected package. Checks run its real tests and fail on a test failure. Apps run the built program with the caller's arguments. Document how to select the executable for a project with several entry points.
+- Give a new user a short README explaining when to use the builder, the required Nix settings, and working build, test, run, and monorepo examples. State material platform and lockfile constraints.
+
+## Ground changes in working projects
+
+- Pin a real, publicly available upstream benchmark per language. Identify its revision, the target, and what the benchmark validates. Run the built program or its upstream tests. Use Rust for benchmark orchestration, including when the project being measured uses another language.
+- Exercise the public CLI and a downstream flake for a single project and a monorepo with shared code. Verify test failures propagate, target selection works, and a native dependency update needs no extra Nix hash. Check the generated build graph and exercise it with import-from-derivation disabled.
+- Report measurements with their command, workload, trial count, and cache conditions. Keep correctness checks alongside timings.
