@@ -9,6 +9,7 @@ drvlang builds native lockfile projects with Nix. Each language has a CLI for wo
 | Go | [drvgo](https://github.com/drvlang/drvgo) | Go modules |
 | JavaScript and TypeScript | [drvjs](https://github.com/drvlang/drvjs) | pnpm |
 | Python | [drvpy](https://github.com/drvlang/drvpy) | uv |
+| Ruby | [drvrb](https://github.com/drvlang/drvrb) | Bundler Gemfile.lock checksums and workspace gems |
 | Rust | [drvrust](https://github.com/drvlang/drvrust) | Cargo |
 | Java | [drvjava](https://github.com/drvlang/drvjava) | rules_jvm_external Maven lock |
 | C# and .NET | [drvnet](https://github.com/drvlang/drvnet) | NuGet packages.lock.json |
