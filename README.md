@@ -12,6 +12,7 @@ drvlang builds native lockfile projects with Nix. Each language has a CLI for wo
 | Rust | [drvrust](https://github.com/drvlang/drvrust) | Cargo |
 | Java | [drvjava](https://github.com/drvlang/drvjava) | rules_jvm_external Maven lock |
 | C# and .NET | [drvnet](https://github.com/drvlang/drvnet) | NuGet packages.lock.json |
+| C | [drvc](https://github.com/drvlang/drvc) | Meson with optional hashed wrap archives |
 | C and C++ | [drvcpp](https://github.com/drvlang/drvcpp) | Meson wrap files |
 
 Each builder's README describes its supported projects and platforms. The [shared contributor instructions](AGENTS.md) define the cross-language contract. [drvkit](https://github.com/drvlang/drvkit) contains shared implementations.
